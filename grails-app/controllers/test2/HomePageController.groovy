@@ -1,10 +1,8 @@
 package test2
 
-import grails.converters.JSON
-
 class HomePageController {
 
-
+     def monoBreakerService;
 
     def index() {
 
@@ -21,10 +19,23 @@ class HomePageController {
     }
 
     def create() {
-
+        try{
         Content c = new Content(content: 'test',title: 'testTitle')
-        c.conten
-        render c  as JSON
+
+            def status = monoBreakerService.serviceMethod
+
+
+            if (status) {
+                render "OK"
+            }  else {
+                render "Not OK" + status.error
+            }
+
+
+
+        } catch(Exception) {
+
+        }
 
 
     }
